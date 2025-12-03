@@ -2,14 +2,23 @@
 
 import { useState } from "react";
 import ListaProjetos from "@/app/_components/ListarProjetos";
-import { useGetProjetos } from "@/app/_hooks/useGetProjetos";
+import { useGetProjetos, Projeto } from "@/app/_hooks/useGetProjetos";
 import ModalNovoProjeto from "@/app/_components/ModalNovoProjeto";
+import ModalEditarProjeto from "@/app/_components/ModalEditarProjeto";
 
 export default function TelaFuncionarios() {
-  const { projetos, loading, error, deleteProjeto, recarregar } = useGetProjetos();
+  const { projetos, loading, error, deleteProjeto, recarregar, updateProjeto } = useGetProjetos();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [projetoEditando, setProjetoEditando] = useState<Projeto | null>(null); 
 
+  const handleSaveEdit = async (id: number, dados: Partial<Projeto>) => {
+    const sucesso = await updateProjeto(id, dados);
+    if (sucesso) {
+      recarregar();
+      setProjetoEditando(null);
+    }
+  }
   return (
     <div className="container p-0">
       <div className="flex justify-between items-center mb-2">
@@ -34,6 +43,7 @@ export default function TelaFuncionarios() {
         loading={loading}
         error={error}
         onDelete={deleteProjeto}
+        onEdit={(proj) => setProjetoEditando(proj)}
       />
 
       <ModalNovoProjeto
@@ -41,6 +51,22 @@ export default function TelaFuncionarios() {
         onClose={() => setIsModalOpen(false)}
         onSuccess={() => {recarregar();}}
       />
+
+      {projetoEditando && (
+        <ModalEditarProjeto
+          isOpen={!!projetoEditando}
+          onClose={() => setProjetoEditando(null)}
+          projeto={projetoEditando}
+          onSave={async (id, dados) => {
+            const sucesso = await updateProjeto(id, dados);
+            if (sucesso) {
+              recarregar();
+              return true
+            }
+            return false;
+          }}
+        />
+      )}
     </div>
   );
     

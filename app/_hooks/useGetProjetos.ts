@@ -35,6 +35,72 @@ export function useGetProjetos() {
         }
     };
 
+    const updateProjeto = async (id: number, dados: Partial<Projeto>) => {
+        const { status, ...dadosGerais } = dados;
+
+        const temAtualizacaoDeStatus = !!status;
+        const temAtualizacaoGeral = Object.keys(dadosGerais).length > 0;
+
+        try {
+            const requisicoes = []
+
+            if (temAtualizacaoGeral) {
+                const payloadGeral = {
+                    ...dadosGerais,
+                    ...(dadosGerais.data_inicio && {
+                        data_inicio: new Date(dadosGerais.data_inicio)
+                    }),
+                    ...(dadosGerais.data_previsao_termino && {
+                        data_previsao_termino: new Date(dadosGerais.data_previsao_termino)
+                    }),
+                };
+
+                requisicoes.push(
+                    fetch(`${process.env.NEXT_PUBLIC_API_URL}/projetos/${id}`, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payloadGeral), 
+                    }).then(async (response) => {
+                        if (!response.ok) {
+                            const err = await response.json()
+                            throw new Error(err.message || "Erro ao atualizar dados do projeto");
+                        }
+                        return response;
+                    })
+                );
+            }
+
+            if (temAtualizacaoDeStatus) {
+                requisicoes.push(
+                    fetch(`${process.env.NEXT_PUBLIC_API_URL}/projetos/${id}/status`, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ status }),
+                    }).then(async (response) => {
+                        if (!response.ok) {
+                            const err = await response.json();
+                            throw new Error(err.message || "Erro ao atualizar status");
+                        }
+                        return response;
+                    })
+                );
+            }
+            
+            await Promise.all(requisicoes);
+
+            alert("Projeto atualizado com sucesso!");
+            return true;
+        } catch (error) {
+            console.error(error);
+            if (error instanceof Error) {
+                alert(error.message);
+            } else {
+                alert("Erro desconhecido ao atualizar projeto.")
+            }
+            return false;
+        }
+    };
+
     const deleteProjeto = async (id: number) => {
         const confirm = window.confirm("Tem certeza que quer exluir esse projeto?");
         if (!confirm) return;
@@ -55,5 +121,5 @@ export function useGetProjetos() {
         }
     };
 
-    return { projetos, loading, error, deleteProjeto, recarregar: fetchData}
+    return { projetos, loading, error, deleteProjeto, recarregar: fetchData, updateProjeto}
 }

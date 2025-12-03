@@ -82,7 +82,7 @@ export default function ModalEditarFuncionario({ isOpen, onClose, funcionario, o
             <input type="number" step="0.01" name="salario" value={formData.salario} onChange={handleChange} className="mt-1 w-full border rounded p-2 text-black" />
 
             <div className="flex justify-end gap-2 mt-4">
-              <button type="button" onClick={onClose} className="bg-red-700 text-white px-4 py-2 rounded">Cancelar</button>
+              <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 text-gray-800">Cancelar</button>
               <button type="submit" disabled={loading} className="bg-blue-600 text-white px-4 py-2 rounded">
                 {loading ? "Salvando..." : "Salvar Alterações"}
               </button>

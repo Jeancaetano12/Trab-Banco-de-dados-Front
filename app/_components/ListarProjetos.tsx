@@ -6,11 +6,12 @@ import { Projeto } from "../_hooks/useGetProjetos";
 interface ListaProps {
   projetos: Projeto[];
   loading: boolean;
+  onEdit: (projeto: Projeto) => void
   error: string | null;
   onDelete: (id: number) => void
 }
 
-export default function ListaProjetos({ projetos, loading, error, onDelete }: ListaProps) {
+export default function ListaProjetos({ projetos, loading, error, onDelete, onEdit }: ListaProps) {
 
     if (loading) return <p className="text-center p-4">Carregando dados...</p>;
     if (error) return <p className="text-red-500 text-center p-4">{error}</p>;
@@ -53,12 +54,12 @@ export default function ListaProjetos({ projetos, loading, error, onDelete }: Li
                             <td className="px-5 py-4 border-b border-gray-600 text-sm text-gray-600">
                                 <div className="flex gap-2">
                                     {/* Botão de Editar (Leva para outra página) */}
-                                    <Link 
-                                        href={`/funcionarios/editar/${proj.id}`}
+                                    <button
+                                        onClick={() => onEdit(proj)}
                                         className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 text-xs"
                                     >
                                         Editar
-                                    </Link>
+                                    </button>
 
                                     {/* Botão de Excluir (Chama a função do hook) */}
                                     <button
