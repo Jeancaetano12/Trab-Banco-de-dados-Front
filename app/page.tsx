@@ -13,9 +13,6 @@ export default function Home() {
             A aplicação implementa um CRUD (Create, Read, Update, Delete) completo para gerenciar uma lista de
             clientes, utilizando tecnologias modernas do ecossistema JavaScript/TypeScript.
             <hr className="mt-2 mb-2 border-t-4 border-blue-600 dark:border-blue-400 rounded" />
-            O projeto foi construído do zero, passando por um intenso processo de depuração e refatoração para
-            garantir uma base de código estável, segura e alinhada com as melhores práticas de desenvolvimento web
-            atuais.
           </div>
           <div className="bg-white dark:bg-gray-800 p-4 mt-2 rounded border border-red-700 dark:border-red-500">
             <h2 className="text-xl text-center font-bold mb-2">Atenção ⚠️</h2>

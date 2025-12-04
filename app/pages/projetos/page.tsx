@@ -3,14 +3,20 @@
 import { useState } from "react";
 import ListaProjetos from "@/app/_components/ListarProjetos";
 import { useGetProjetos, Projeto } from "@/app/_hooks/useGetProjetos";
+import { useGetFuncionarios } from "@/app/_hooks/useGetFuncionarios";
 import ModalNovoProjeto from "@/app/_components/ModalNovoProjeto";
 import ModalEditarProjeto from "@/app/_components/ModalEditarProjeto";
+import ModalNovaAlocacao from "@/app/_components/ModalNovaAlocacao";
+import ModalVisualizarAlocacoes from "@/app/_components/ModalAlocacoes";
 
 export default function TelaFuncionarios() {
   const { projetos, loading, error, deleteProjeto, recarregar, updateProjeto } = useGetProjetos();
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalAberto, setModalAberto] = useState(false); // Modal de alocacoes
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal pros Projetos
   const [projetoEditando, setProjetoEditando] = useState<Projeto | null>(null); 
+  const [projetoVisualizar, setProjetoVisualizar] = useState<Projeto | null>(null);
+
+  const { funcionarios } = useGetFuncionarios();
 
   const handleSaveEdit = async (id: number, dados: Partial<Projeto>) => {
     const sucesso = await updateProjeto(id, dados);
@@ -24,12 +30,19 @@ export default function TelaFuncionarios() {
       <div className="flex justify-between items-center mb-2">
         <h1 className="text-3xl mb-6 mt-6 font-mono font-bold text-gray-800 dark:text-gray-200">Gerenciar Projetos</h1>
         <button 
-        onClick={() => setIsModalOpen(true)}
+          onClick={() => setIsModalOpen(true)}
           className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
         >
           + Novo Projeto
         </button>
         
+        <button
+          onClick={() => setModalAberto(true)}
+          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+        >
+          + Nova Alocação
+        </button>
+
         <button
           className="bg-yellow-400 text-white px-4 py-2 rounded hover:bg-yellow-600 transition"
           onClick={recarregar}
@@ -44,12 +57,29 @@ export default function TelaFuncionarios() {
         error={error}
         onDelete={deleteProjeto}
         onEdit={(proj) => setProjetoEditando(proj)}
+        onVerAlocacao={(proj) => setProjetoVisualizar(proj)}
       />
 
       <ModalNovoProjeto
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSuccess={() => {recarregar();}}
+      />
+
+      <ModalNovaAlocacao
+        isOpen={modalAberto}
+        onClose={() => setModalAberto(false)}
+        onSuccess={() => {
+            alert("Sucesso! Clique em Alocação para visualizar.");
+        }}
+        listaFuncionarios={funcionarios}
+        listaProjetos={projetos}
+      />
+
+      <ModalVisualizarAlocacoes
+        isOpen={!!projetoVisualizar}
+        onClose={() => setProjetoVisualizar(null)}
+        projeto={projetoVisualizar}
       />
 
       {projetoEditando && (

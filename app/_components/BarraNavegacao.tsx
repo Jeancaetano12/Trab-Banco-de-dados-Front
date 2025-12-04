@@ -16,9 +16,6 @@ export default function Sidebar() {
         <Link href="/pages/projetos" className="hover:text-cyan-400 transition-colors">
           Projetos
         </Link>
-        <Link href="/pages/alocacoes" className="hover:text-cyan-400 transition-colors">
-          Alocações
-        </Link>
       </nav>
     </aside>
   );
