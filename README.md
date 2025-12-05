@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📌 DB CRUD — Frontend (Next.js)
+## Equipe: Alison Oliveira - 01735081, Jean Caetano - 01735073, Rafael de Freitas - 01756899
 
-## Getting Started
+Este é o frontend do sistema de gerenciamento de Funcionários, Projetos e Alocações, desenvolvido com Next.js e integrado ao backend via API REST.
 
-First, run the development server:
+A aplicação permite visualizar, cadastrar, editar e remover funcionários e projetos, além de gerenciar alocações.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Tecnologias Utilizadas
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Next.js 14+
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+React
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+TypeScript
 
-## Learn More
+CSS (globals.css)
 
-To learn more about Next.js, take a look at the following resources:
+Fetch API para comunicação com backend
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Componentização com arquivos .tsx
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   
+   
+   
+    📁 Estrutura do Projeto
+    app/
+    │
+    ├── _components/               # Componentes reutilizáveis (tabelas, modais, barra de navegação)
+    │   ├── BarraNavegacao.tsx
+    │   ├── ListaFuncionarios.tsx
+    │   ├── ListarProjetos.tsx
+    │   ├── ModalAlocacoes.tsx
+    │   ├── ModalEditarFuncionario.tsx
+    │   ├── ModalEditarProjeto.tsx
+    │   ├── ModalNovaAlocacao.tsx
+    │   ├── ModalNovoFuncionario.tsx
+    │   └── ModalNovoProjeto.tsx
+    │
+    ├── _hooks/                    # Hooks para acessar o backend
+    │   ├── useAlocacoes.ts
+    │   ├── useGetFuncionarios.ts
+    │   └── useGetProjetos.ts
+    │
+    ├── pages/                     # Páginas principais
+    │   ├── funcionarios/
+    │   │     └── page.tsx         # Tela de CRUD de funcionários
+    │   ├── projetos/
+    │         └── page.tsx         # Tela de CRUD de projetos
+    │
+    ├── favicon.ico
+    ├── globals.css                # Estilos globais
+    ├── layout.tsx                 # Layout padrão da aplicação
+    └── page.tsx                   # Página inicial
 
-## Deploy on Vercel
+## 🖥️ Funcionalidades
+✔ Página Inicial
+![telaInicial](./public/home.projeto.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Links para navegação entre Funcionários e Projetos.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+✔ Funcionários
+
+Listar todos os funcionários
+
+Criar novo funcionário
+
+Editar funcionário existente
+
+Excluir funcionário
+
+Modal de criação
+
+Modal de edição
+
+## Listagem via componente ListaFuncionarios.tsx
+![cadastroDeFuncionario](./screenshots/funcionario.projeto.png)
+![editFuncionario](./screenshots/editFuncionario.Projeto.jpeg)
+
+✔ Projetos
+
+Listar todos os projetos
+
+Criar novo projeto
+
+Editar projeto
+
+Excluir projeto
+
+## Listagem via componente ListarProjetos.tsx
+![cadastroDeProjeto](./screenshots/projetos.projeto.png)
+![editProjeto](./screenshots/editProjetos.projeto.png)
+
+✔ Alocações
+
+Criar nova alocação
+
+Editar alocação
+
+Excluir alocação
+
+## Realizadas via ModalAlocacoes.tsx
+![editAlocacao](./screenshots/alocacao.projeto.png)
