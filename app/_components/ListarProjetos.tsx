@@ -57,14 +57,14 @@ export default function ListaProjetos({ projetos, loading, error, onDelete, onEd
                                     {/* Botão de Editar (Leva para outra página) */}
                                     <button
                                         onClick={() => onEdit(proj)}
-                                        className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 text-xs"
+                                        className="bg-gradient-to-r from-blue-600 to-cyan-700 text-white px-3 py-1 rounded hover:from-blue-700 hover:to-cyan-700 text-xs"
                                     >
                                         Editar
                                     </button>
                                     {/* Ver detalhes */}
                                     <button
                                         onClick={() => onVerAlocacao(proj)}
-                                        className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 text-xs"                                    
+                                        className="bg-gradient-to-r from-blue-600 to-cyan-700 text-white px-3 py-1 rounded hover:from-blue-700 hover:to-cyan-700 text-xs"                                    
                                     >
                                         Alocação
                                     </button>

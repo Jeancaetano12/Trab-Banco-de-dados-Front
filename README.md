@@ -54,12 +54,12 @@ Componentização com arquivos .tsx
 
 ## 🖥️ Funcionalidades
 ✔ Página Inicial
-![telaInicial](./public/home.projeto.png)
+![telaInicial](./public/home.png)
 
 Links para navegação entre Funcionários e Projetos.
 
 ✔ Funcionários
-
+![telaFuncionario](./public/telaFuncionario.png)
 Listar todos os funcionários
 
 Criar novo funcionário
@@ -73,11 +73,11 @@ Modal de criação
 Modal de edição
 
 ## Listagem via componente ListaFuncionarios.tsx
-![cadastroDeFuncionario](./screenshots/funcionario.projeto.png)
-![editFuncionario](./screenshots/editFuncionario.Projeto.jpeg)
+![cadastroDeFuncionario](./public/telaFuncionario.png)
+![editFuncionario](./public/modalEditarFuncinario.png)
 
 ✔ Projetos
-
+![telaProjeto](./public/telaProjeto.png)
 Listar todos os projetos
 
 Criar novo projeto
@@ -87,8 +87,8 @@ Editar projeto
 Excluir projeto
 
 ## Listagem via componente ListarProjetos.tsx
-![cadastroDeProjeto](./screenshots/projetos.projeto.png)
-![editProjeto](./screenshots/editProjetos.projeto.png)
+![cadastroDeProjeto](./public/telaProjeto.png)
+![editProjeto](./public/modalEditarProjeto.png)
 
 ✔ Alocações
 
@@ -99,4 +99,4 @@ Editar alocação
 Excluir alocação
 
 ## Realizadas via ModalAlocacoes.tsx
-![editAlocacao](./screenshots/alocacao.projeto.png)
+![editAlocacao](./public/modalAlocacoes.png)
