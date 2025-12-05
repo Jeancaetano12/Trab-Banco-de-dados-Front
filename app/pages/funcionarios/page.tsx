@@ -18,49 +18,78 @@ export default function TelaFuncionarios() {
       recarregar();
       setFuncionarioEditando(null);
     }
-  }
+  };
+
   return (
-    <div className="container p-0">
-      <div className="flex justify-between items-center mb-2">
-        <h1 className="text-3xl mb-6 mt-6 font-mono font-bold text-gray-800 dark:text-gray-200">Gerenciar Funcionários</h1>
-        <button 
-          onClick={() => setIsModalOpen(true)}
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
-        >
-          + Novo Funcionário
-        </button>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 p-4 md:p-8">
+      {/* Container que envolve todo o conteúdo, excluindo a sidebar */}
+      <div className="max-w-7xl mx-auto ml-0 lg:ml-64"> {/* Ajuste aqui: ml-0 em mobile, ml-64 em desktop */}
+        {/* Header Section */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+          <div>
+            <h1 className="text-3xl md:text-4xl font-bold text-slate-800 dark:text-white mb-2">
+              Gerenciar Funcionários
+            </h1>
+            <div className="w-24 h-1 bg-gradient-to-r from-green-500 to-blue-500 rounded-full"></div>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row gap-3">
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 rounded-xl 
+                        hover:from-green-700 hover:to-emerald-700 transition-all duration-300 transform hover:-translate-y-0.5 
+                        shadow-lg hover:shadow-xl font-medium"
+            >
+              <span className="text-xl">+</span>
+              Novo Funcionário
+            </button>
 
-        <button
-          className="bg-yellow-400 text-white px-4 py-2 rounded hover:bg-yellow-600 transition"
-          onClick={recarregar}
-        >
-          Atualizar pagina
-        </button>
-      </div>
-      <hr className="mb-2" />
-      <ListaFuncionarios 
-        funcionarios={funcionarios}
-        loading={loading}
-        error={error}
-        onDelete={deleteFuncionario}
-        onEdit={(func) => setFuncionarioEditando(func)}
-      />
+            <button
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 py-3 rounded-xl 
+                        hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 transform hover:-translate-y-0.5 
+                        shadow-lg hover:shadow-xl font-medium"
+              onClick={recarregar}
+            >
+              <span className="text-xl">🔄</span>
+              Atualizar
+            </button>
+          </div>
+        </div>
 
-      <ModalNovoFuncionario
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSuccess={() => {recarregar();}}
-      />
+        {/* Decorative Divider */}
+        <div className="flex items-center mb-8">
+          <div className="flex-grow h-px bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-600 to-transparent"></div>
+          <span className="mx-4 text-slate-400 dark:text-slate-500">👥</span>
+          <div className="flex-grow h-px bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-600 to-transparent"></div>
+        </div>
 
-      {funcionarioEditando && (
-        <ModalEditarFuncionario
-          isOpen={!!funcionarioEditando}
-          onClose={() => setFuncionarioEditando(null)}
-          funcionario={funcionarioEditando}
-          onSave={handleSaveEdit}
+        {/* Content */}
+        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+          <ListaFuncionarios 
+            funcionarios={funcionarios}
+            loading={loading}
+            error={error}
+            onDelete={deleteFuncionario}
+            onEdit={(func) => setFuncionarioEditando(func)}
+          />
+        </div>
+
+        {/* Modals */}
+        <ModalNovoFuncionario
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSuccess={() => {recarregar();}}
         />
-      )}
+
+        {funcionarioEditando && (
+          <ModalEditarFuncionario
+            isOpen={!!funcionarioEditando}
+            onClose={() => setFuncionarioEditando(null)}
+            funcionario={funcionarioEditando}
+            onSave={handleSaveEdit}
+          />
+        )}
+      </div>
     </div>
   );
-    
 }
