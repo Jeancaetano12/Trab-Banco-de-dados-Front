@@ -26,7 +26,7 @@ export default function RootLayout({
           {/* 2. A área de conteúdo principal */}
           {/* O ml-64 (margin-left) serve para empurrar o conteúdo
               para o lado, já que a Sidebar tem largura w-64 */}
-          <main className9="flex-1 ml-64 p-0 min-h-screen bg-slate-800">
+          <main className="flex-1 ml-64 p-0 min-h-screen bg-slate-800">
             {children}
           </main>
         </div>
